@@ -74,7 +74,7 @@ def update_htaccess(link, path):
     print(new_htaccess)
 
     # now append our new redirect to the end
-    new_redirect = '\n' + START_REDIRECT + '\n' + REDIRECT + link + '\n' + END_REDIRECT
+    new_redirect = START_REDIRECT + '\n' + REDIRECT + link + '\n' + END_REDIRECT + '\n'
     new_htaccess += new_redirect
 
     print('The final htaccess file:')
@@ -110,8 +110,8 @@ def open_gsheet():
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    if os.path.exists('./secrets/token.pickle'):
+        with open('./secrets/token.pickle', 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -119,10 +119,10 @@ def open_gsheet():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                os.path.dirname(sys.argv[0]) + '/credentials.json', SCOPES)
+                os.path.dirname(sys.argv[0]) + './secrets/credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open(os.path.dirname(sys.argv[0]) + '/token.pickle', 'wb') as token:
+        with open(os.path.dirname(sys.argv[0]) + '/secrets/token.pickle', 'wb') as token:
             pickle.dump(creds, token)
     service = build('sheets', 'v4', credentials=creds)
     # Call the Sheets API

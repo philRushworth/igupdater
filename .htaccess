@@ -7,8 +7,6 @@
 
 # More redirects might be here
 # So make sure that we don't kill these lines
-
-
 ## BEGIN IGUPDATER
-Redirect 302 /instagram-profile https://crontab.guru/every-5-minutes
+Redirect 302 /instagram-profile https://www.cbc.ca/
 ## END IGUPDATER
